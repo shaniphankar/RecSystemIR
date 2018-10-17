@@ -2,19 +2,24 @@ import numpy as np
 import pprint
 import os
 from random import choices
+
 def CUR(matrix,r):
 	nR=matrix.sum(axis=1)
 	nC=matrix.sum(axis=0)
-	print(nR)
-	print(nC)
+	# print(nR)
+	# print(nC)
 	full=matrix.sum()
-	print(full)
+	# print(full)
 	weightsR=nR/full
 	weightsC=nC/full
 	choicesR=range(3952)
 	choicesC=range(6040)
 	C=choices(choicesC,weightsC,k=r)
 	R=choices(choicesR,weightsR,k=r)
+	Rmat=matrix[R]
+	Cmat=matrix[:,C]
+	C=np.sort(C)
+	R=np.sort(R)
 	W=[]
 	for i in C:
 		emptyRow=[]
@@ -29,9 +34,6 @@ def CUR(matrix,r):
 	print(X)
 	print(SigInv)
 	print(Y)
-	U=np.matmul(np.matmul((np.matmul(Y,SigInv)),SigInv),np.transpose(X))
+	U=np.matmul(np.matmul(Y,(np.matmul(SigInv,SigInv))),np.transpose(X))
 	print(U)
-	# Cmat=matrix[:,C]
-	Rmat=matrix[R]
-	Cmat=matrix[:,C]
 	return Cmat,U,Rmat

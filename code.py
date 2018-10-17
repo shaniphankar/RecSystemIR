@@ -19,6 +19,8 @@ def main():
 	# pp.pprint(mID_uID_rating)
 	f.close()
 	C,U,R=matrixFuncs.CUR(mID_uID_rating,4)
+	print(mID_uID_rating)
+	print((np.matmul((np.matmul(C,U)),R)))
 	# print(data)
 
 if __name__ == '__main__':
