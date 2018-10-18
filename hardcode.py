@@ -1,3 +1,4 @@
+'''This file contains hardcoded values such as file locations and global variables to be used throughout the execution of the program'''
 import numpy as np
 rows=3
 cols=10
