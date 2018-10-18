@@ -58,10 +58,12 @@ def SVD1(data,flag=True):
 	sigma=np.zeros(shape=data.shape)
 	# print(sigma.shape)
 	lim=0
-	order1=np.argsort(eig_vals1)
-	order2=np.argsort(eig_vals2)
-	eig_vals1=np.sort(eig_vals1)
-	eig_vals2=np.sort(eig_vals2)
+	order1=np.flip(np.argsort(eig_vals1))
+	order2=np.flip(np.argsort(eig_vals2))
+	print(eig_vals1[order1])
+	print(eig_vals2[order2])
+	eig_vals1=eig_vals1[order1]
+	eig_vals2=eig_vals2[order2]
 	U=U[order1]
 	V=V[order2]
 	if(eig_vals1.shape[0]<eig_vals2.shape[0]):

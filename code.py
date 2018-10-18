@@ -18,7 +18,7 @@ def main():
 		mID_uID_rating[int(line.split('::')[1])-1][int(line.split('::')[0])-1]=line.split('::')[2]
 	# pp.pprint(mID_uID_rating)
 	f.close()
-	C,U,R=matrixFuncs.CUR(mID_uID_rating,100)
+	C,U,R=matrixFuncs.CUR(mID_uID_rating,10)
 	# pp.pprint(mID_uID_rating)
 	# pp.pprint((np.matmul((np.matmul(C,U)),R)))
 	# print(data)
