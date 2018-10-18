@@ -39,6 +39,6 @@ def CUR(matrix,r):
 	# print(Y)
 	# print(np.matmul(Y,np.matmul(SigInv,SigInv)))
 	U=np.matmul(np.matmul(Y,(np.matmul(SigInv,SigInv))),np.transpose(X))
-	print(U)
-	print(U.shape)
+	# print(U)
+	# print(U.shape)
 	return Cmat,U,Rmat
