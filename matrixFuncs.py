@@ -1,6 +1,7 @@
 import numpy as np
 import pprint
 import os
+import svdModified
 from random import choices
 
 def CUR(matrix,r):
@@ -21,19 +22,23 @@ def CUR(matrix,r):
 	C=np.sort(C)
 	R=np.sort(R)
 	W=[]
-	for i in C:
+	for i in R:
 		emptyRow=[]
-		for j in R:
-			emptyRow.append(matrix[j-1][i-1])
+		for j in C:
+			emptyRow.append(matrix[i-1][j-1])
 		W.append(emptyRow)
 	W=np.array(W)
-	print(W)
+	# print(W)
 	#Using in built SVD for now. Replace with the other group's version
-	X,Sig,Y=np.linalg.svd(W,full_matrices=False)
-	SigInv=np.linalg.pinv(np.diag(Sig))
-	print(X)
-	print(SigInv)
-	print(Y)
+	X,Sig,Y=svdModified.SVD1(W,True)
+	# X,Sig,Y=svdModified.SVD2(W)
+	# print(Sig.shape)
+	SigInv=np.linalg.pinv(Sig)
+	# print(X)
+	# print(SigInv.shape)
+	# print(Y)
+	# print(np.matmul(Y,np.matmul(SigInv,SigInv)))
 	U=np.matmul(np.matmul(Y,(np.matmul(SigInv,SigInv))),np.transpose(X))
 	print(U)
+	print(U.shape)
 	return Cmat,U,Rmat
