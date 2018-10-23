@@ -2,6 +2,7 @@ import numpy as np
 import pprint
 import os
 import svdModified
+import math
 from random import choices
 
 def CUR(matrix,r):
@@ -17,8 +18,17 @@ def CUR(matrix,r):
 	choicesC=range(6040)
 	C=choices(choicesC,weightsC,k=r)
 	R=choices(choicesR,weightsR,k=r)
+	print(R)
 	Rmat=matrix[R]
 	Cmat=matrix[:,C]
+	for x in range(len(R)):
+		Rmat[x]=Rmat[x]/math.sqrt(len(R)*weightsR[R[x]])
+	for x in range(len(C)):
+		Cmat[x]=Cmat[x]/math.sqrt(len(C)*weightsC[C[x]])
+	print(Rmat.shape)
+	print(Cmat.shape)
+	# Rmat=matrix[R]
+	# Cmat=matrix[:,C]	
 	C=np.sort(C)
 	R=np.sort(R)
 	W=[]
@@ -33,7 +43,20 @@ def CUR(matrix,r):
 	X,Sig,Y=svdModified.SVD1(W,True)
 	# X,Sig,Y=svdModified.SVD2(W)
 	# print(Sig.shape)
-	SigInv=np.linalg.pinv(Sig)
+	# print(Sig.shape)
+	SigInv=[]
+	for x in range(Sig.shape[0]):
+		row=[]
+		for y in range(Sig.shape[1]):
+			if(Sig[x][y]==0):
+				row.append(0)
+			else:
+				row.append(1/Sig[x][y])
+		SigInv.append(row)
+	# print(Sig.shape)
+	SigInv=np.array(SigInv)
+	print("Shape of SigInv")
+	print(SigInv.shape)
 	# print(X)
 	# print(SigInv.shape)
 	# print(Y)
