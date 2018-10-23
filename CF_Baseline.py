@@ -157,6 +157,5 @@ def main():
 	collab_matrix = get_prediction(top_k,collab_matrix,averageItem,averageUser,overall_average)
 	print(root_mean_square_error(test_data,collab_matrix))
 
-
 if __name__=='__main__':
 	main()

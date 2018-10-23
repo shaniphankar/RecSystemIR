@@ -23,9 +23,9 @@ def reduce(U,sigma,V):
 	vals_req=1
 	for i in range(lim,0,-1):
 		temp=get_sum(sigma[range(i)])
-		print(i)
-		print(temp)
-		print(total)
+		# print(i)
+		# print(temp)
+		# print(total)
 		if(temp<.9*total):
 			vals_req=i+1
 			break
@@ -70,7 +70,6 @@ def SVD1(data,flag=True):
 		lim=eig_vals1.shape[0]
 	else:
 		lim=eig_vals2.shape[0]
-
 	for i in range (0,lim,1):
 		if(eig_vals1[i]>=0):
 			sigma[i][i]=math.sqrt(eig_vals1[i])

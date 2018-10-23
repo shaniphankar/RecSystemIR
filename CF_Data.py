@@ -12,7 +12,7 @@ training_data = []
 while n/(number_of_items*number_of_users) < 0.7:
 	i = np.random.randint(number_of_users)
 	j = np.random.randint(number_of_items)
-	if (i,j) in selected_data.keys():
+	if selected_data.get((i,j)):
 		continue
 	else:
 		selected_data[(i,j)] = True
