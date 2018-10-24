@@ -22,7 +22,7 @@ def sample(number_of_items,number_of_users,data):
 			training_data.append((indices[x][0],indices[x][1],data[indices[x][0]][indices[x][1]]))
 		else:
 			test_data.append((indices[x][0],indices[x][1]))
-	return training_data,test_data	
+	return training_data,test_data
 	# while n/(number_of_items*number_of_users) < 0.7:
 	# 	i = np.random.randint(number_of_items)
 	# 	j = np.random.randint(number_of_users)
@@ -61,16 +61,23 @@ def main():
 	# pp.pprint(mID_uID_rating)
 	f.close()
 	print(mID_uID_rating.shape)
-	# C,U,R=matrixFuncs.CUR(mID_uID_rating,1000)
+	C,U,R=matrixFuncs.CUR(mID_uID_rating,1000)
 	# pp.pprint(mID_uID_rating)
 	# pp.pprint((np.matmul((np.matmul(C,U)),R)))
-	training_data,test_data=sample(3952,6040,mID_uID_rating)
+	CUR = (np.matmul((np.matmul(C,U)),R))
+	training_data,test_data=sample(3952,6040,CUR)
+	# np.save("test_data.npy",test_data)
 	collab_matrix = np.zeros(shape=(number_of_items,number_of_users))
 	for i in training_data:
 		collab_matrix[i[0]][i[1]] = i[2]
 	print(collab_matrix.shape)
+<<<<<<< HEAD
+	collab_matrix = CF.normalise_collab_matrix(CUR,number_of_items,number_of_users,top_k,collab_matrix)
+	print(CF.root_mean_square_error(test_data,collab_matrix,CUR))
+=======
 	collab_matrix = CF.normalise_collab_matrix(mID_uID_rating,number_of_items,number_of_users,top_k,collab_matrix,test_data)
 	print(CF.root_mean_square_error(test_data,collab_matrix))
+>>>>>>> 02564b43c1a867d1d5a52da9bdc361e42277274d
 
 if __name__ == '__main__':
 	main()

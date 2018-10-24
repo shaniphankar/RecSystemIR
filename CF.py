@@ -17,6 +17,7 @@ def normalise_collab_matrix(data,number_of_items,number_of_users,top_k,collab_ma
 		for j in range(0,number_of_users):
 			if collab_matrix[i][j] != 0:
 				collab_matrix[i][j] -= average[-1]
+	print("DONE")
 
 	print("Finished finding the averages");
 	#predicting using cosine similarity
@@ -28,7 +29,13 @@ def normalise_collab_matrix(data,number_of_items,number_of_users,top_k,collab_ma
 		for j in range(0, number_of_items):
 			if i != j:
 				dot_product = 0
+<<<<<<< HEAD
+				# for k in range(0,number_of_users):
+					# dot_product += collab_matrix[i][k] * collab_matrix[j][k]
+				dot_product += np.dot(collab_matrix[i],collab_matrix[j])
+=======
 				dot_product = np.dot(collab_matrix[i] , collab_matrix[j])
+>>>>>>> 02564b43c1a867d1d5a52da9bdc361e42277274d
 				if dot_product > 0 and len(cosine_similarity_scores) < top_k:
 					heapq.heappush(cosine_similarity_scores,(dot_product,j))
 				elif len(cosine_similarity_scores) >= top_k and cosine_similarity_scores[0][0] < dot_product:
@@ -44,17 +51,21 @@ def normalise_collab_matrix(data,number_of_items,number_of_users,top_k,collab_ma
 				if sum_of_weights==0:
 					collab_matrix[i][k]=0
 				else:
-					collab_matrix[i][k]=weighed_sum/sum_of_weights
+					collab_matrix[i][k]=weighed_sum/sum_of_weights+average[i]
 
 	print(collab_matrix)
+	np.save("collab2.npy",collab_matrix)
 	return collab_matrix
 
-def root_mean_square_error(test_data,collab_matrix):
+def root_mean_square_error(test_data,collab_matrix,orig_matrix):
 	squared_sum = 0
+	non_zero = 0
 	for pair in test_data:
-		print("collab_matrix had %f, test_data had %d"%(collab_matrix[pair[0]][pair[1]],data[pair[0]][pair[1]]) )
-		squared_sum += math.pow( (data[pair[0]][pair[1]] - collab_matrix[pair[0]][pair[1]]),2 )
-	rmse = math.sqrt(squared_sum/len(test_data))
+		print("collab_matrix had %f, test_data had %d"%(collab_matrix[pair[0]][pair[1]],orig_matrix[pair[0]][pair[1]]) )
+		if(orig_matrix[pair[0]][pair[1]] != 0):
+			squared_sum += math.pow( (orig_matrix[pair[0]][pair[1]] - collab_matrix[pair[0]][pair[1]]),2 )
+			non_zero+=1
+	rmse = math.sqrt(squared_sum/non_zero)
 	return rmse
 
 def main():
@@ -73,7 +84,7 @@ def main():
 	print(collab_matrix)
 	collab_matrix = normalise_collab_matrix(data,number_of_users,number_of_items,top_k,collab_matrix)
 	print(root_mean_square_error(test_data,collab_matrix))
-	
+
 
 
 if __name__=='__main__':
