@@ -1,7 +1,7 @@
 from CF_Data import training_data,test_data,number_of_users,number_of_items,top_k,data
 import numpy as np
 import math, heapq
-def normalise_collab_matrix(data,number_of_items,number_of_users,top_k,collab_matrix):
+def normalise_collab_matrix(data,number_of_items,number_of_users,top_k,collab_matrix,test_data):
 	average = []
 	for i in range(0,number_of_items):
 		sum = 0
@@ -21,30 +21,34 @@ def normalise_collab_matrix(data,number_of_items,number_of_users,top_k,collab_ma
 	print("Finished finding the averages");
 	#predicting using cosine similarity
 	score_holder = []
-	for i in range(0,number_of_items):
-		cosine_similarity_scores = []
-		weighed_sum = 0
-		sum_of_weights = 0
-		for j in range(0, number_of_items):
-			if i != j:
-				dot_product = 0
-				dot_product = np.dot(collab_matrix[i] , collab_matrix[j])
-				if dot_product > 0 and len(cosine_similarity_scores) < top_k:
-					heapq.heappush(cosine_similarity_scores,(dot_product,j))
-				elif len(cosine_similarity_scores) >= top_k and cosine_similarity_scores[0][0] < dot_product:
-					heapq.heappop(cosine_similarity_scores)
-					heapq.heappush(cosine_similarity_scores,(dot_product,j))
-		for k in range(0,number_of_users):
-			if collab_matrix[i][k]==0:
-				for j in range(0,len(cosine_similarity_scores)):
-					weight=cosine_similarity_scores[j][0]
-					item=cosine_similarity_scores[j][1]
-					weighed_sum+=weight*data[item][k]
-					sum_of_weights+=weight
-				if sum_of_weights==0:
-					collab_matrix[i][k]=0
-				else:
-					collab_matrix[i][k]=weighed_sum/sum_of_weights
+	predicted_movies=zeros(3952)
+	for data_point in test_data:
+		i=data_point[0]
+		if predicted_movies[i] == 0: 
+			predicted_movies[i]=1
+			cosine_similarity_scores = []
+			weighed_sum = 0
+			sum_of_weights = 0
+			for j in range(0, number_of_items):
+				if i != j:
+					dot_product = 0
+					dot_product = np.dot(collab_matrix[i] , collab_matrix[j])
+					if dot_product > 0 and len(cosine_similarity_scores) < top_k:
+						heapq.heappush(cosine_similarity_scores,(dot_product,j))
+					elif len(cosine_similarity_scores) >= top_k and cosine_similarity_scores[0][0] < dot_product:
+						heapq.heappop(cosine_similarity_scores)
+						heapq.heappush(cosine_similarity_scores,(dot_product,j))
+			for k in range(0,number_of_users):
+				if collab_matrix[i][k]==0:
+					for j in range(0,len(cosine_similarity_scores)):
+						weight=cosine_similarity_scores[j][0]
+						item=cosine_similarity_scores[j][1]
+						weighed_sum+=weight*data[item][k]
+						sum_of_weights+=weight
+					if sum_of_weights==0:
+						collab_matrix[i][k]=0
+					else:
+						collab_matrix[i][k]=weighed_sum/sum_of_weights+average[k]
 
 	print(collab_matrix)
 	return collab_matrix

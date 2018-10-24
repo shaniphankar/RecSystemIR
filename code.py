@@ -69,7 +69,7 @@ def main():
 	for i in training_data:
 		collab_matrix[i[0]][i[1]] = i[2]
 	print(collab_matrix.shape)
-	collab_matrix = CF.normalise_collab_matrix(mID_uID_rating,number_of_items,number_of_users,top_k,collab_matrix)
+	collab_matrix = CF.normalise_collab_matrix(mID_uID_rating,number_of_items,number_of_users,top_k,collab_matrix,test_data)
 	print(CF.root_mean_square_error(test_data,collab_matrix))
 
 if __name__ == '__main__':
