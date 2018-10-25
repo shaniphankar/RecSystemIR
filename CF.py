@@ -29,13 +29,10 @@ def normalise_collab_matrix(data,number_of_items,number_of_users,top_k,collab_ma
 		for j in range(0, number_of_items):
 			if i != j:
 				dot_product = 0
-<<<<<<< HEAD
 				# for k in range(0,number_of_users):
 					# dot_product += collab_matrix[i][k] * collab_matrix[j][k]
 				dot_product += np.dot(collab_matrix[i],collab_matrix[j])
-=======
 				dot_product = np.dot(collab_matrix[i] , collab_matrix[j])
->>>>>>> 02564b43c1a867d1d5a52da9bdc361e42277274d
 				if dot_product > 0 and len(cosine_similarity_scores) < top_k:
 					heapq.heappush(cosine_similarity_scores,(dot_product,j))
 				elif len(cosine_similarity_scores) >= top_k and cosine_similarity_scores[0][0] < dot_product:

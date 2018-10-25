@@ -4,6 +4,7 @@ import os
 from random import randint
 import matrixFuncs
 import CF
+import svdModified
 
 def sample(number_of_items,number_of_users,data):
 	selected_data={}
@@ -61,23 +62,29 @@ def main():
 	# pp.pprint(mID_uID_rating)
 	f.close()
 	print(mID_uID_rating.shape)
-	C,U,R=matrixFuncs.CUR(mID_uID_rating,1000)
+	# C,U,R=matrixFuncs.CUR(mID_uID_rating,1000)
 	# pp.pprint(mID_uID_rating)
 	# pp.pprint((np.matmul((np.matmul(C,U)),R)))
-	CUR = (np.matmul((np.matmul(C,U)),R))
-	training_data,test_data=sample(3952,6040,CUR)
+	# CURMat = (np.matmul((np.matmul(C,U)),R))
+	# print(CURMat)
+	U,Sig,V=svdModified.SVD1(mID_uID_rating)
+	SVDMat=np.matmul(np.matmul(U,Sig),V.transpose())
+	print("SVD")
+	print(SVDMat)
+	training_data,test_data=sample(3952,6040,SVDMat)
+	# print("Training Data")
+	# pp.pprint(training_data)
+	print("testing Data")
+	for x in test_data:
+		pp.pprint(SVDMat[x[0]][x[1]])	
 	# np.save("test_data.npy",test_data)
-	collab_matrix = np.zeros(shape=(number_of_items,number_of_users))
-	for i in training_data:
-		collab_matrix[i[0]][i[1]] = i[2]
-	print(collab_matrix.shape)
-<<<<<<< HEAD
-	collab_matrix = CF.normalise_collab_matrix(CUR,number_of_items,number_of_users,top_k,collab_matrix)
-	print(CF.root_mean_square_error(test_data,collab_matrix,CUR))
-=======
-	collab_matrix = CF.normalise_collab_matrix(mID_uID_rating,number_of_items,number_of_users,top_k,collab_matrix,test_data)
-	print(CF.root_mean_square_error(test_data,collab_matrix))
->>>>>>> 02564b43c1a867d1d5a52da9bdc361e42277274d
+	# collab_matrix = np.zeros(shape=(number_of_items,number_of_users))
+	# for i in training_data:
+	# 	collab_matrix[i[0]][i[1]] = i[2]
+	# collab_matrix = CF.normalise_collab_matrix(SVDMat,number_of_items,number_of_users,top_k,collab_matrix)
+	# print(CF.root_mean_square_error(test_data,collab_matrix,SVDMat))
+	# collab_matrix = CF.normalise_collab_matrix(mID_uID_rating,number_of_items,number_of_users,top_k,collab_matrix,test_data)
+	# print(CF.root_mean_square_error(test_data,collab_matrix,mID_uID_rating))
 
 if __name__ == '__main__':
 	main()
