@@ -62,7 +62,7 @@ def precision_topk(test_data, collab_matrix,orig_matrix,k,threshold):
 	store = []
 	for pair in test_data:
 		# print("collab_matrix had %f, test_data had %d"%(collab_matrix[pair[0]][pair[1]],orig_matrix[pair[0]][pair[1]]) )
-		if(orig_matrix[pair[0]][pair[1]] != 0):
+		if(orig[pair[0]][pair[1]] != 0):
 			store.append((collab_matrix[pair[0]][pair[1]],orig_matrix[pair[0]][pair[1]]))
 	store = sorted(store,key=lambda x: x[0],reverse=True)[:k]
 	count = 0
@@ -75,8 +75,8 @@ def precision_topk(test_data, collab_matrix,orig_matrix,k,threshold):
 def main():
 
 
-	test_data = np.load("test_dataCF.npy")
-	collab_matrix = np.load("collab_matrixCF.npy")
+	test_data = np.load("test_dataCUR.npy")
+	collab_matrix = np.load("collab_matrixCUR.npy")
 
 	rmse = root_mean_square_error(test_data,collab_matrix,mID_uID_rating)
 	print(rmse)
@@ -91,6 +91,6 @@ def main():
 	# a = precision_topk(test_data,collab_matrix,mID_uID_rating,10,2.5)
 	# print(a)
 
-	rho = spearman_correlation_coefficient(test_data,collab_matrix,mID_uID_rating)
+	# rho = spearman_correlation_coefficient(test_data,collab_matrix,mID_uID_rating)
 if __name__ == '__main__':
 	main()

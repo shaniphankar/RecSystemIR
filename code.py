@@ -4,6 +4,7 @@ import os
 from random import randint
 import matrixFuncs
 import CF
+import CF_Baseline
 import svdModified
 
 def sample(number_of_items,number_of_users,data):
@@ -74,11 +75,14 @@ def main():
 	# np.save("test_dataCF.npy",test_data1)
 	# collab_matrix1 = CF.normalise_collab_matrix(mID_uID_rating,number_of_items,number_of_users,top_k,collab_matrix1)
 	# np.save("collab_matrixCF.npy",collab_matrix1)
-	# # print("2**************")
-	# # For baseline, not done yet.
-	# # np.save("test_data1.npy",test_data)
-	# # collab_matrix1 = CF.normalise_collab_matrix(mID_uID_rating,number_of_items,number_of_users,top_k,collab_matrix1)
-	# # np.save("collab_matrixCF.npy",collab_matrix1)
+	print("2**************")
+	training_data2,test_data2=sample(3952,6040,mID_uID_rating)
+	collab_matrix2 = np.zeros(shape=(number_of_items,number_of_users))
+	for i in training_data2:
+		collab_matrix2[i[0]][i[1]] = i[2]
+	np.save("test_dataCFBaseline.npy",test_data2)
+	collab_matrix2 = CF_Baseline.compute(mID_uID_rating,number_of_items,number_of_users,top_k,collab_matrix2)
+	np.save("collab_matrixCFBaseline.npy",collab_matrix2)
 	# print("3**************")
 	# training_data3,test_data3=sample(3952,6040,mID_uID_rating)
 	# np.save("test_dataSVD.npy",test_data3)
@@ -106,15 +110,15 @@ def main():
 	# C,U,R=matrixFuncs.CUR(collab_matrix5,1000,True)
 	# CURMat = (np.matmul((np.matmul(C,U)),R))
 	# np.save("collab_matrixCUR.npy",CURMat)
-	print("6**************")
-	training_data6,test_data6=sample(3952,6040,mID_uID_rating)
-	np.save("test_dataCUR90.npy",test_data6)
-	collab_matrix6 = np.zeros(shape=(number_of_items,number_of_users))
-	for i in training_data6:
-		collab_matrix6[i[0]][i[1]] = i[2]
-	C,U,R=matrixFuncs.CUR(collab_matrix6,1000,False)
-	CURMat = (np.matmul((np.matmul(C,U)),R))
-	np.save("collab_matrixCUR90.npy",CURMat)
+	# print("6**************")
+	# training_data6,test_data6=sample(3952,6040,mID_uID_rating)
+	# np.save("test_dataCUR90.npy",test_data6)
+	# collab_matrix6 = np.zeros(shape=(number_of_items,number_of_users))
+	# for i in training_data6:
+	# 	collab_matrix6[i[0]][i[1]] = i[2]
+	# C,U,R=matrixFuncs.CUR(collab_matrix6,1000,False)
+	# CURMat = (np.matmul((np.matmul(C,U)),R))
+	# np.save("collab_matrixCUR90.npy",CURMat)
 	
 	# print(CF.root_mean_square_error(test_data,collab_matrix,mID_uID_rating))
 
