@@ -5,7 +5,7 @@ import svdModified
 import math
 from random import choices
 
-def CUR(matrix,r):
+def CUR(matrix,r,flag):
 	nR=matrix.sum(axis=1)
 	nC=matrix.sum(axis=0)
 	# print(nR)
@@ -18,7 +18,7 @@ def CUR(matrix,r):
 	choicesC=range(6040)
 	C=choices(choicesC,weightsC,k=r)
 	R=choices(choicesR,weightsR,k=r)
-	print(R)
+	# print(R)
 	Rmat=matrix[R]
 	Cmat=matrix[:,C]
 	for x in range(len(R)):
@@ -40,7 +40,7 @@ def CUR(matrix,r):
 	W=np.array(W)
 	# print(W)
 	#Using in built SVD for now. Replace with the other group's version
-	X,Sig,Y=svdModified.SVD1(W,True)
+	X,Sig,Y=svdModified.SVD1(W,flag)
 	# X,Sig,Y=svdModified.SVD2(W)
 	# print(Sig.shape)
 	# print(Sig.shape)

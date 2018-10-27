@@ -15,7 +15,7 @@ def get_sum(sigma):
 
 def reduce(U,sigma,V):
 	'''Reducing the energy to the parameter present within the hardcode file'''
-	print(sigma)
+	# print(sigma)
 	print(sigma.shape)
 	lim=min(sigma.shape)
 	total=get_sum(sigma)
@@ -49,7 +49,6 @@ def SVD1(data,flag=True):
 	AAT=np.matmul(data,data_trans)
 	eig_vals1,U=np.linalg.eig(AAT)
 	U=np.real(U)
-
 	ATA=np.matmul(data_trans,data)
 	eig_vals2,V=np.linalg.eig(ATA)
 	V=np.real(V)
@@ -60,8 +59,8 @@ def SVD1(data,flag=True):
 	lim=0
 	order1=np.flip(np.argsort(eig_vals1))
 	order2=np.flip(np.argsort(eig_vals2))
-	print(eig_vals1[order1])
-	print(eig_vals2[order2])
+	# print(eig_vals1[order1])
+	# print(eig_vals2[order2])
 	eig_vals1=eig_vals1[order1]
 	eig_vals2=eig_vals2[order2]
 	U=U[order1]

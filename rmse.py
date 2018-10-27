@@ -4,10 +4,6 @@ import os
 from random import randint
 import math
 from scipy.stats import spearmanr
-
-test_data = np.load("test_data.npy")
-collab_matrix = np.load("collab2.npy")
-
 mID_uID_rating=np.zeros(shape=(3952,6040))
 f=open(os.getcwd()+'/ml-1m/ratings.dat',encoding='latin-1')
 for line in f:
@@ -19,7 +15,7 @@ def root_mean_square_error(test_data,collab_matrix,orig_matrix):
 	squared_sum = 0
 	non_zero = 0
 	for pair in test_data:
-		print("collab_matrix had %f, test_data had %d"%(collab_matrix[pair[0]][pair[1]],orig_matrix[pair[0]][pair[1]]) )
+		# print("collab_matrix had %f, test_data had %d"%(collab_matrix[pair[0]][pair[1]],orig_matrix[pair[0]][pair[1]]) )
 		if(orig_matrix[pair[0]][pair[1]] != 0):
 			squared_sum += math.pow( (orig_matrix[pair[0]][pair[1]] - collab_matrix[pair[0]][pair[1]]),2 )
 			non_zero+=1
@@ -55,7 +51,7 @@ def spearman_correlation_coefficient(test_data, collab_matrix,orig_matrix):
 		sum += a[i]**2
 	n = len(a)
 	rho = 1- ((6*sum)/((n)*((n**2) - 1)))
-	print(rho)
+	return(rho)
 	#print(dict2)
 
 
@@ -65,7 +61,7 @@ def spearman_correlation_coefficient(test_data, collab_matrix,orig_matrix):
 def precision_topk(test_data, collab_matrix,orig_matrix,k,threshold):
 	store = []
 	for pair in test_data:
-		print("collab_matrix had %f, test_data had %d"%(collab_matrix[pair[0]][pair[1]],orig_matrix[pair[0]][pair[1]]) )
+		# print("collab_matrix had %f, test_data had %d"%(collab_matrix[pair[0]][pair[1]],orig_matrix[pair[0]][pair[1]]) )
 		if(orig_matrix[pair[0]][pair[1]] != 0):
 			store.append((collab_matrix[pair[0]][pair[1]],orig_matrix[pair[0]][pair[1]]))
 	store = sorted(store,key=lambda x: x[0],reverse=True)[:k]
@@ -76,18 +72,25 @@ def precision_topk(test_data, collab_matrix,orig_matrix,k,threshold):
 	print(count/k)
 	return store
 
+def main():
 
-# rmse = root_mean_square_error(test_data,collab_matrix,mID_uID_rating)
-# print(rmse)
 
-#inbuilt = inbuilt_scc(test_data,collab_matrix,mID_uID_rating)
-#print(inbuilt)
+	test_data = np.load("test_dataCF.npy")
+	collab_matrix = np.load("collab_matrixCF.npy")
 
-#built = spearman_correlation_coefficient(test_data,collab_matrix,mID_uID_rating)
-#print(built)
+	rmse = root_mean_square_error(test_data,collab_matrix,mID_uID_rating)
+	print(rmse)
 
-#print(collab_matrix,mID_uID_rating)
-#a = precision_topk(test_data,collab_matrix,mID_uID_rating,10,2.5)
-#print(a)
+	# inbuilt = inbuilt_scc(test_data,collab_matrix,mID_uID_rating)
+	# print(inbuilt)
 
-rho = spearman_correlation_coefficient(test_data,collab_matrix,mID_uID_rating)
+	built = spearman_correlation_coefficient(test_data,collab_matrix,mID_uID_rating)
+	print(built)
+
+	# print(collab_matrix,mID_uID_rating)
+	# a = precision_topk(test_data,collab_matrix,mID_uID_rating,10,2.5)
+	# print(a)
+
+	rho = spearman_correlation_coefficient(test_data,collab_matrix,mID_uID_rating)
+if __name__ == '__main__':
+	main()

@@ -51,7 +51,7 @@ def normalise_collab_matrix(data,number_of_items,number_of_users,top_k,collab_ma
 					collab_matrix[i][k]=weighed_sum/sum_of_weights+average[i]
 
 	print(collab_matrix)
-	np.save("collab2.npy",collab_matrix)
+	# np.save("collab2.npy",collab_matrix)
 	return collab_matrix
 
 def root_mean_square_error(test_data,collab_matrix,orig_matrix):
