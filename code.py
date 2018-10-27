@@ -55,7 +55,7 @@ def main():
 	# f.close()
 	number_of_items=3952
 	number_of_users=6040
-	top_k=10
+	top_k=5
 	mID_uID_rating=np.zeros(shape=(3952,6040))
 	f=open(os.getcwd()+'/ml-1m/ratings.dat',encoding='latin-1')
 	for line in f:
@@ -67,22 +67,22 @@ def main():
 	# pp.pprint((np.matmul((np.matmul(C,U)),R)))
 	# CURMat = (np.matmul((np.matmul(C,U)),R))
 	# print(CURMat)
-	# print("1**************")
-	# training_data1,test_data1=sample(3952,6040,mID_uID_rating)
-	# collab_matrix1 = np.zeros(shape=(number_of_items,number_of_users))
-	# for i in training_data1:
-	# 	collab_matrix1[i[0]][i[1]] = i[2]
-	# np.save("test_dataCF.npy",test_data1)
-	# collab_matrix1 = CF.normalise_collab_matrix(mID_uID_rating,number_of_items,number_of_users,top_k,collab_matrix1)
-	# np.save("collab_matrixCF.npy",collab_matrix1)
-	print("2**************")
-	training_data2,test_data2=sample(3952,6040,mID_uID_rating)
-	collab_matrix2 = np.zeros(shape=(number_of_items,number_of_users))
-	for i in training_data2:
-		collab_matrix2[i[0]][i[1]] = i[2]
-	np.save("test_dataCFBaseline.npy",test_data2)
-	collab_matrix2 = CF_Baseline.compute(mID_uID_rating,number_of_items,number_of_users,top_k,collab_matrix2)
-	np.save("collab_matrixCFBaseline.npy",collab_matrix2)
+	print("1**************")
+	training_data1,test_data1=sample(3952,6040,mID_uID_rating)
+	collab_matrix1 = np.zeros(shape=(number_of_items,number_of_users))
+	for i in training_data1:
+		collab_matrix1[i[0]][i[1]] = i[2]
+	np.save("test_dataCF.npy",test_data1)
+	collab_matrix1 = CF.normalise_collab_matrix(mID_uID_rating,number_of_items,number_of_users,top_k,collab_matrix1)
+	np.save("collab_matrixCF.npy",collab_matrix1)
+	# print("2**************")
+	# training_data2,test_data2=sample(3952,6040,mID_uID_rating)
+	# collab_matrix2 = np.zeros(shape=(number_of_items,number_of_users))
+	# for i in training_data2:
+	# 	collab_matrix2[i[0]][i[1]] = i[2]
+	# np.save("test_dataCFBaseline.npy",test_data2)
+	# collab_matrix2 = CF_Baseline.compute(mID_uID_rating,number_of_items,number_of_users,top_k,collab_matrix2)
+	# np.save("collab_matrixCFBaseline.npy",collab_matrix2)
 	# print("3**************")
 	# training_data3,test_data3=sample(3952,6040,mID_uID_rating)
 	# np.save("test_dataSVD.npy",test_data3)

@@ -1,4 +1,5 @@
 import numpy as np, heapq, math
+from scipy import spatial
 # from CF_Data import training_data,test_data,number_of_users,number_of_items,top_k,data
 
 def find_cosine_similarity(number_of_items,number_of_users,i,j,collab_matrix):
@@ -34,16 +35,12 @@ def get_prediction(data,number_of_items,number_of_users,top_k,collab_matrix,aver
 		sum_of_weights = 0
 		for j in range(0, number_of_items):
 			if i != j:
-				cosine_score = find_cosine_similarity(number_of_items,number_of_users,i,j,collab_matrix)
-				# print("i=%d j=%d cosine_score=%f"%(i,j,cosine_score))
-				if cosine_score > 0 and len(cosine_similarity_scores) < top_k:
-					heapq.heappush(cosine_similarity_scores,(cosine_score,j))
-				elif len(cosine_similarity_scores) >= top_k and cosine_similarity_scores[0][0] < cosine_score:
+				dot_product=np.dot(collab_matrix[i],collab_matrix[j])
+				if dot_product > 0 and len(cosine_similarity_scores) < top_k:
+					heapq.heappush(cosine_similarity_scores,(dot_product,j))
+				elif len(cosine_similarity_scores) >= top_k and cosine_similarity_scores[0][0] < dot_product:
 					heapq.heappop(cosine_similarity_scores)
-					heapq.heappush(cosine_similarity_scores,(cosine_score,j))
-		print()
-		# print(cosine_similarity_scores)
-		print()
+					heapq.heappush(cosine_similarity_scores,(dot_product,j))
 		if len(cosine_similarity_scores) == 0:
 			for j in range(0,number_of_users):
 				collab_matrix[i][j] = 3
@@ -56,7 +53,7 @@ def get_prediction(data,number_of_items,number_of_users,top_k,collab_matrix,aver
 					for j in range(0,len(cosine_similarity_scores)):
 						weight = cosine_similarity_scores[j][0]
 						item = cosine_similarity_scores[j][1]
-						# print(i,k)
+						# print(i,k)s
 						# print()
 						# print(item,k)
 						baseline_other = overall_average + averageUser[k] + averageItem[item]
