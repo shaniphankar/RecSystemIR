@@ -7,6 +7,11 @@ import CF
 import CF_Baseline
 import svdModified
 
+''' This function generates the training and test data
+	number_of_items: Number of items in the dataset (movies in this case)
+	number_of_users: Number of users in the dataset
+	data: The dataset
+'''
 def sample(number_of_items,number_of_users,data):
 	selected_data={}
 	training_data=[]
@@ -53,6 +58,8 @@ def main():
 	# 	mID_names[line.split('::')[0]]=line.split('::')[1]
 	# pp.pprint(mID_names)
 	# f.close()
+
+	''' Initialise the Movie ID User ID Matrix and load the dataset '''
 	number_of_items=3952
 	number_of_users=6040
 	top_k=5
@@ -67,6 +74,15 @@ def main():
 	# pp.pprint((np.matmul((np.matmul(C,U)),R)))
 	# CURMat = (np.matmul((np.matmul(C,U)),R))
 	# print(CURMat)
+
+	''' Uncomment the following code to generate the test data, training data and collab matrices
+	1. Collaborative Filtering
+	2. Collaborative Filtering with baseline
+	3. SVD
+	4. SVD with 90% retained energy
+	5. CUR
+	6, CUR with 90% retained energy
+	'''
 	print("1**************")
 	training_data1,test_data1=sample(3952,6040,mID_uID_rating)
 	collab_matrix1 = np.zeros(shape=(number_of_items,number_of_users))
@@ -119,7 +135,7 @@ def main():
 	# C,U,R=matrixFuncs.CUR(collab_matrix6,1000,False)
 	# CURMat = (np.matmul((np.matmul(C,U)),R))
 	# np.save("collab_matrixCUR90.npy",CURMat)
-	
+
 	# print(CF.root_mean_square_error(test_data,collab_matrix,mID_uID_rating))
 
 if __name__ == '__main__':
