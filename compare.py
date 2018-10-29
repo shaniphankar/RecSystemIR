@@ -1,16 +1,19 @@
+#importing the required libraries
 import numpy as np
 import pprint
 import os
 from random import randint
 import math
-from scipy.stats import spearmanr
+
+# Loading the dataset
 mID_uID_rating=np.zeros(shape=(3952,6040))
 f=open(os.getcwd()+'/ml-1m/ratings.dat',encoding='latin-1')
 for line in f:
   mID_uID_rating[int(line.split('::')[1])-1][int(line.split('::')[0])-1]=line.split('::')[2]
-# pp.pprint(mID_uID_rating)
 f.close()
 
+# Definition of the Root Mean Square Error
+# We calculate the squared error for every pair in the test data and then take the square root of it
 def root_mean_square_error(test_data,collab_matrix,orig_matrix):
 	squared_sum = 0
 	non_zero = 0
@@ -22,6 +25,7 @@ def root_mean_square_error(test_data,collab_matrix,orig_matrix):
 	rmse = math.sqrt(squared_sum/non_zero)
 	return rmse
 
+# Definition the Spearman correlation coefficient, it tells us about the statistical dependence between the rankings of two variables.
 def spearman_correlation_coefficient(test_data, collab_matrix,orig_matrix):
 	test_orig_matrix = []
 	test_collab_matrix = []
@@ -54,10 +58,8 @@ def spearman_correlation_coefficient(test_data, collab_matrix,orig_matrix):
 	return(rho)
 	#print(dict2)
 
-
-	#print(test_orig_matrix)
-	#print(test_collab_matrix)
-
+# Definition of the TopK precision, where K is a variable.
+# It tells us about the percentage of relevant documents in the top results returned by the system.
 def precision_topk(test_data, collab_matrix,orig_matrix,k,threshold):
 	store = []
 	for pair in test_data:
@@ -74,23 +76,18 @@ def precision_topk(test_data, collab_matrix,orig_matrix,k,threshold):
 
 def main():
 
-
+	# Loading the saved data
 	test_data = np.load("test_dataCUR.npy")
 	collab_matrix = np.load("collab_matrixCUR.npy")
 
 	rmse = root_mean_square_error(test_data,collab_matrix,mID_uID_rating)
 	print(rmse)
 
-	# inbuilt = inbuilt_scc(test_data,collab_matrix,mID_uID_rating)
-	# print(inbuilt)
+	rho = spearman_correlation_coefficient(test_data,collab_matrix,mID_uID_rating)
+	print(rho)
+	
+	pk = precision_topk(test_data,collab_matrix,mID_uID_rating,10,2.5)
+	print(pk)
 
-	built = spearman_correlation_coefficient(test_data,collab_matrix,mID_uID_rating)
-	print(built)
-
-	# print(collab_matrix,mID_uID_rating)
-	# a = precision_topk(test_data,collab_matrix,mID_uID_rating,10,2.5)
-	# print(a)
-
-	# rho = spearman_correlation_coefficient(test_data,collab_matrix,mID_uID_rating)
 if __name__ == '__main__':
 	main()
