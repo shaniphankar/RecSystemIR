@@ -1,11 +1,11 @@
-'''This program implements svd in two ways: One with the help of eigen values and the latter with the help of the inbuilt svd function'''
+'''This program implements svd in two ways: One with the help of eigen values and the latter with the help of the inbuilt svd function. We make use of the user-built way in our computations'''
 import numpy as np,scipy as sp
 # from scipy import np.linalg
 # from hardcodeSVD import data,retain
 import math
 
 def get_sum(sigma):
-	'''Obtain the total energy present'''
+	'''Obtain the total energy present in the sigma matrix. Basically, the sum of all the diagonal elements'''
 	lim=min(sigma.shape)
 	sum=0
 	for i in range(0,lim,1):
@@ -14,7 +14,11 @@ def get_sum(sigma):
 	return sum
 
 def reduce(U,sigma,V):
-	'''Reducing the energy to the parameter present within the hardcode file'''
+	'''Reducing the energy in SVD by removing concepts from sigma matrix and their corresponding rows and columns until 90% of Deviation is retained
+	U: The decomposed U matrix that contains association between movies and concepts
+	sigma: The decomposed diagonal sigma matrix that contains concepts
+	V: The decomposed V matrix that contains association between User and concept
+	'''
 	# print(sigma)
 	print(sigma.shape)
 	lim=min(sigma.shape)
@@ -44,7 +48,8 @@ def reduce(U,sigma,V):
 	return (Unew,sigmanew,Vnew)	
 
 def SVD1(data,flag=True):
-	'''Manual implementation which finds the eigen values and the eigen vectors'''
+	'''Manual implementation which finds the eigen values and the eigen vectors. 
+	Data: The training data passed on which SVD decomposition is to be done.'''
 	data_trans=data.transpose()
 	AAT=np.matmul(data,data_trans)
 	eig_vals1,U=np.linalg.eig(AAT)

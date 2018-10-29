@@ -4,6 +4,17 @@ from scipy.spatial.distance import cosine
 # from CF_Data import training_data,test_data,number_of_users,number_of_items,top_k,data
 
 def find_cosine_similarity(number_of_items,number_of_users,i,j,collab_matrix):
+	''' This function finds the cosine similarity between two vectors
+		WARNING: This function is deprecated as we have made use of np.dot and will be removed in subsequent versions
+		Input:
+			number_of_items:The number of items
+			number_of_items:The number of users
+			i:The first vector
+			j:The secod vector
+			collab_matrix: The matrix which contains the normalised values and the predictions
+		Output:
+		cosinesine_score: The cosine score between vectors i and j
+	'''
 	sum1 = 0
 	sum2 = 0
 	cosine_score = 0
@@ -21,6 +32,23 @@ def find_cosine_similarity(number_of_items,number_of_users,i,j,collab_matrix):
 	return cosine_score
 
 def get_prediction(data,number_of_items,number_of_users,top_k,collab_matrix,averageItem,averageUser,overall_average):
+	''' 
+		This function helps fill the data in the prediction matrix with the help of the intput data. Here we find the 
+		top k items based on the normalised cosine similarity and then find the rating by adjusting for the baseline and the 
+		bias of each user.
+		Input:
+			data: The data for each user and the items that the user has used.
+			number_of_items: The total number of items
+			number_of_users: The total numbrer of users
+			top_k: Hardcoded value to tell how many similar vectors to use in the cosine similarity
+			collab_matrix: The normalised matrix that will contain the predictions
+			averageItem: The average rating for each item
+			averageUser: The average rating provided by each user
+			overall_average: The average of all the ratings present within the training data
+		Output:
+			collab_matrix: This matrix contains the predictions based on the algorithm
+
+	'''
 	for i in range(0,number_of_items):
 		for j in range(0,number_of_users):
 			if collab_matrix[i][j] != 0:
@@ -88,6 +116,19 @@ def get_prediction(data,number_of_items,number_of_users,top_k,collab_matrix,aver
 # 	return rmse
 
 def findAverage(data,number_of_items,number_of_users,collab_matrix):
+	'''
+		This function finds the average of each user, each item adnd the overall average of all the ratings within 
+		the dataset and will be used by get_prediction
+		Input:
+			data: The data for the user and the ratings given by the user.
+			number_of_items: The total number of items
+			number_of_users: The total number of users
+			collab_matrix: The normalised matrix on which predictions will be obtained
+		Output:
+			averageItem: The average item rating for each item. It is a vector whose ith entry gives the rating for item i
+			averageUser: The average user rating provided by the user. It is a vector whose ith entry gives the average rating given by user i
+			overall_average: The average of all the ratings provided within the data
+	'''
 	temp = 0
 	count = 0
 	averageItem = []
@@ -154,7 +195,25 @@ def findAverage(data,number_of_items,number_of_users,collab_matrix):
 # 	return collab_matrix
 
 def compute(data,number_of_items,number_of_users,top_k,collab_matrix):
+	'''
+		This function calls the other functions required to perform the algorithm
+		Input:
+			data: The data of the ratings for each user
+			number_of_items: The total number of items
+			number_of_users: The total number of users
+			top_k: Hardcoded value to tell how many similar vectors to use in the cosine similarity
+			collab_matrix: The normalised matrix that will contain the predictions
+
+	'''
 	averageItem,averageUser,overall_average = findAverage(data,number_of_items,number_of_users,collab_matrix)
 	collab_matrix = get_prediction(data,number_of_items,number_of_users,top_k,collab_matrix,averageItem,averageUser,overall_average)
 	return(collab_matrix)
 	# print(root_mean_square_error(test_data,collab_matrix))
+
+def main():
+	# Code stub
+	'''
+		Only for testing should take input from CF_Data.py and then run the same functions as compute
+	'''
+if __name__=='__main__':
+	main()

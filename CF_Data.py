@@ -1,3 +1,13 @@
+'''
+	This program contains test data for CF.py and CF_Baseline.py for testing to check the performace and the correctness of the outputs
+		1. In the start, the number of users and the number of items have been hardcoded along with the corresponding data which has been pulled from the class slides
+		2. This is followed by the percentage of test data to the training data.
+		3. We then generate random numbers to differentiate the test data from the random data.
+		4. After doing so the program then takes the corresponding data as the input.
+
+	WARNING:
+	Use random permutations as it has a smaller computation overhead, this is precisely which is done in the main program.
+'''
 import numpy as np
 number_of_users=12
 number_of_items=6

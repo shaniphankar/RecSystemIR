@@ -1,9 +1,32 @@
+'''
+	The objetive of this program is to implement collaborative filtering(Item-Item)
+	This makes use of 3 functions
+		main:
+			Set the values for the top correlations and obtain the training and test data for the testing program
+			Note: this functionality is not used for the final implementation
+		normalise_collab_matrix:
+			This normalizes the rating for every item, so that no item has unusually low or high ratings
+			It then finds the cosine similarity and then for the top K [Hardcoded] items, it finds the weighed mean for the rating
+		root_mean_square_error:
+			It finds the root mean square error with respect to the test data
+'''
 from CF_Data import training_data,test_data,number_of_users,number_of_items,top_k,data
 import numpy as np
 from scipy.spatial.distance import cosine
 import math, heapq
 
 def normalise_collab_matrix(data,number_of_items,number_of_users,top_k,collab_matrix):
+	''' This function first normalizes the rating for each item and then does a prediction based on the cosine similarity of the K closest
+		raters. Note:K is a hardcoded value. 
+		Input:
+			data:The ratings corrosponding to every user and item within the dataset.
+			number_of_items:The number of items
+			number_of_users:The number of users
+			top_k:The top k values used for cosine similarity
+			collab_matrix:The matrix to be used for predictions
+		Output:   
+			collab_matrix:The matrix containing all the predictions	
+	'''
 	average = []
 	for i in range(0,number_of_items):
 		sum = 0
@@ -53,6 +76,14 @@ def normalise_collab_matrix(data,number_of_items,number_of_users,top_k,collab_ma
 	return collab_matrix
 
 def root_mean_square_error(test_data,collab_matrix,orig_matrix):
+	''' This function finds the error of the predictions of the algorithm, with respect to the training data
+		Input:
+			test_data:The data which has been used to test the predictions of the algorithm
+			collab_matrix: The matrix containing all the predictions
+			orig_matix: The matrix containing the original data
+		Output:
+			rmse: The root mean square error
+	'''
 	squared_sum = 0
 	non_zero = 0
 	for pair in test_data:

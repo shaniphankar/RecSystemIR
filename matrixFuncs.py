@@ -6,6 +6,12 @@ import math
 from random import choices
 
 def CUR(matrix,r,flag):
+	"""
+	This function returns the C,U,R matrices that can be multiplied to obtain the ratings matrix back
+	matrix: Contains the training data which we need to decompose into C,U,R matrices
+	r: Contains the number of rows and columns to take into consideration when doing random sampling
+	flag: Parameter that decides how much energy to retain in SVD Decomposition. When flag=0, SVD is done without reduction in energy. When flag=1, SVD is done by removing concepts until 90% energy is left.
+	"""
 	nR=matrix.sum(axis=1)
 	nC=matrix.sum(axis=0)
 	# print(nR)
