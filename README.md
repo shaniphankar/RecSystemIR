@@ -1,6 +1,7 @@
 # RecSystemIR
 ## The objective of the project is to create recommender systems with the following methodologies:
 <ul>
+  <li>Dataset: https://grouplens.org/datasets/movielens/1m/<li>
   <li>Collaborative Filtering</li>
   <li>Singular Value Decomposition</li>
   <li>CUR Decomposition</li>
