@@ -1,5 +1,6 @@
 import numpy as np, heapq, math
 from scipy import spatial
+from scipy.spatial.distance import cosine
 # from CF_Data import training_data,test_data,number_of_users,number_of_items,top_k,data
 
 def find_cosine_similarity(number_of_items,number_of_users,i,j,collab_matrix):
@@ -35,12 +36,12 @@ def get_prediction(data,number_of_items,number_of_users,top_k,collab_matrix,aver
 		sum_of_weights = 0
 		for j in range(0, number_of_items):
 			if i != j:
-				dot_product=np.dot(collab_matrix[i],collab_matrix[j])
-				if dot_product > 0 and len(cosine_similarity_scores) < top_k:
-					heapq.heappush(cosine_similarity_scores,(dot_product,j))
-				elif len(cosine_similarity_scores) >= top_k and cosine_similarity_scores[0][0] < dot_product:
+				cosine=cosine(collab_matrix[i],collab_matrix[j])
+				if cosine > 0 and len(cosine_similarity_scores) < top_k:
+					heapq.heappush(cosine_similarity_scores,(cosine,j))
+				elif len(cosine_similarity_scores) >= top_k and cosine_similarity_scores[0][0] < cosine:
 					heapq.heappop(cosine_similarity_scores)
-					heapq.heappush(cosine_similarity_scores,(dot_product,j))
+					heapq.heappush(cosine_similarity_scores,(cosine,j))
 		if len(cosine_similarity_scores) == 0:
 			for j in range(0,number_of_users):
 				collab_matrix[i][j] = 3
@@ -59,7 +60,7 @@ def get_prediction(data,number_of_items,number_of_users,top_k,collab_matrix,aver
 						baseline_other = overall_average + averageUser[k] + averageItem[item]
 						baseline_target = overall_average + averageUser[k] + averageItem[i]
 						#print("baseline_target = %f\nbaseline_other = %f"%(baseline_target,baseline_other))
-						weighed_sum += weight*(data[item][k] - baseline_other) 
+						weighed_sum += weight*(data[item][k] - baseline_other)
 						sum_of_weights += weight
 						# print("%f is weighed sum, %f is sumOfWeights"%(weighed_sum,sum_of_weights))
 					if sum_of_weights == 0:
@@ -72,8 +73,8 @@ def get_prediction(data,number_of_items,number_of_users,top_k,collab_matrix,aver
 						elif val>5 :
 							collab_matrix[i][k] = 5
 						else :
-							collab_matrix[i][k] = 0 
-			
+							collab_matrix[i][k] = 0
+
 
 	print(collab_matrix)
 	return collab_matrix
@@ -139,7 +140,7 @@ def findAverage(data,number_of_items,number_of_users,collab_matrix):
 			averageUser.append(3 - overall_average)
 		else :
 			averageUser.append(row_sum/row_count - overall_average)
-			
+
 	print("overall_average = %f"%(overall_average))
 	print(averageItem)
 	print(averageUser)
@@ -157,6 +158,3 @@ def compute(data,number_of_items,number_of_users,top_k,collab_matrix):
 	collab_matrix = get_prediction(data,number_of_items,number_of_users,top_k,collab_matrix,averageItem,averageUser,overall_average)
 	return(collab_matrix)
 	# print(root_mean_square_error(test_data,collab_matrix))
-
-if __name__=='__main__':
-	main()

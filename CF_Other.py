@@ -1,6 +1,8 @@
 from CF_Data import training_data,test_data,number_of_users,number_of_items,top_k,data
 import numpy as np
 import math, heapq
+from scipy.spatial.distance import cosine
+
 def normalise_collab_matrix(data,number_of_items,number_of_users,top_k,collab_matrix,test_data):
 	average = []
 	for i in range(0,number_of_items):
@@ -24,20 +26,20 @@ def normalise_collab_matrix(data,number_of_items,number_of_users,top_k,collab_ma
 	predicted_movies=zeros(3952)
 	for data_point in test_data:
 		i=data_point[0]
-		if predicted_movies[i] == 0: 
+		if predicted_movies[i] == 0:
 			predicted_movies[i]=1
 			cosine_similarity_scores = []
 			weighed_sum = 0
 			sum_of_weights = 0
 			for j in range(0, number_of_items):
 				if i != j:
-					dot_product = 0
-					dot_product = np.dot(collab_matrix[i] , collab_matrix[j])
-					if dot_product > 0 and len(cosine_similarity_scores) < top_k:
-						heapq.heappush(cosine_similarity_scores,(dot_product,j))
-					elif len(cosine_similarity_scores) >= top_k and cosine_similarity_scores[0][0] < dot_product:
+					cosine = 0
+					cosine = cosine(collab_matrix[i] , collab_matrix[j])
+					if cosine > 0 and len(cosine_similarity_scores) < top_k:
+						heapq.heappush(cosine_similarity_scores,(cosine,j))
+					elif len(cosine_similarity_scores) >= top_k and cosine_similarity_scores[0][0] < cosine:
 						heapq.heappop(cosine_similarity_scores)
-						heapq.heappush(cosine_similarity_scores,(dot_product,j))
+						heapq.heappush(cosine_similarity_scores,(cosine,j))
 			for k in range(0,number_of_users):
 				if collab_matrix[i][k]==0:
 					for j in range(0,len(cosine_similarity_scores)):
@@ -77,7 +79,7 @@ def main():
 	print(collab_matrix)
 	collab_matrix = normalise_collab_matrix(data,number_of_users,number_of_items,top_k,collab_matrix)
 	print(root_mean_square_error(test_data,collab_matrix))
-	
+
 
 
 if __name__=='__main__':
