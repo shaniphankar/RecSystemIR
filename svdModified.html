@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module svdModified</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>svdModified</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/phani/Downloads/CS%20F469%20IR/RecSystemIR/svdModified.py">/home/phani/Downloads/CS F469 IR/RecSystemIR/svdModified.py</a></font></td></tr></table>
+    <p><tt>This&nbsp;program&nbsp;implements&nbsp;svd&nbsp;in&nbsp;two&nbsp;ways:&nbsp;One&nbsp;with&nbsp;the&nbsp;help&nbsp;of&nbsp;eigen&nbsp;values&nbsp;and&nbsp;the&nbsp;latter&nbsp;with&nbsp;the&nbsp;help&nbsp;of&nbsp;the&nbsp;inbuilt&nbsp;svd&nbsp;function.&nbsp;We&nbsp;make&nbsp;use&nbsp;of&nbsp;the&nbsp;user-built&nbsp;way&nbsp;in&nbsp;our&nbsp;computations</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="math.html">math</a><br>
+</td><td width="25%" valign=top><a href="numpy.html">numpy</a><br>
+</td><td width="25%" valign=top><a href="scipy.html">scipy</a><br>
+</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-SVD1"><strong>SVD1</strong></a>(data, flag=True)</dt><dd><tt>Manual&nbsp;implementation&nbsp;which&nbsp;finds&nbsp;the&nbsp;eigen&nbsp;values&nbsp;and&nbsp;the&nbsp;eigen&nbsp;vectors.&nbsp;<br>
+Data:&nbsp;The&nbsp;training&nbsp;data&nbsp;passed&nbsp;on&nbsp;which&nbsp;SVD&nbsp;decomposition&nbsp;is&nbsp;to&nbsp;be&nbsp;done.</tt></dd></dl>
+ <dl><dt><a name="-SVD2"><strong>SVD2</strong></a>(data)</dt><dd><tt>Library&nbsp;defined&nbsp;implementation&nbsp;for&nbsp;the&nbsp;SVD</tt></dd></dl>
+ <dl><dt><a name="-get_sum"><strong>get_sum</strong></a>(sigma)</dt><dd><tt>Obtain&nbsp;the&nbsp;total&nbsp;energy&nbsp;present&nbsp;in&nbsp;the&nbsp;sigma&nbsp;matrix.&nbsp;Basically,&nbsp;the&nbsp;sum&nbsp;of&nbsp;all&nbsp;the&nbsp;diagonal&nbsp;elements</tt></dd></dl>
+ <dl><dt><a name="-reduce"><strong>reduce</strong></a>(U, sigma, V)</dt><dd><tt>Reducing&nbsp;the&nbsp;energy&nbsp;in&nbsp;SVD&nbsp;by&nbsp;removing&nbsp;concepts&nbsp;from&nbsp;sigma&nbsp;matrix&nbsp;and&nbsp;their&nbsp;corresponding&nbsp;rows&nbsp;and&nbsp;columns&nbsp;until&nbsp;90%&nbsp;of&nbsp;Deviation&nbsp;is&nbsp;retained<br>
+U:&nbsp;The&nbsp;decomposed&nbsp;U&nbsp;matrix&nbsp;that&nbsp;contains&nbsp;association&nbsp;between&nbsp;movies&nbsp;and&nbsp;concepts<br>
+sigma:&nbsp;The&nbsp;decomposed&nbsp;diagonal&nbsp;sigma&nbsp;matrix&nbsp;that&nbsp;contains&nbsp;concepts<br>
+V:&nbsp;The&nbsp;decomposed&nbsp;V&nbsp;matrix&nbsp;that&nbsp;contains&nbsp;association&nbsp;between&nbsp;User&nbsp;and&nbsp;concept</tt></dd></dl>
+</td></tr></table>
+</body></html>

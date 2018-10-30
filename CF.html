@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module CF</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>CF</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/phani/Downloads/CS%20F469%20IR/RecSystemIR/CF.py">/home/phani/Downloads/CS F469 IR/RecSystemIR/CF.py</a></font></td></tr></table>
+    <p><tt>The&nbsp;objetive&nbsp;of&nbsp;this&nbsp;program&nbsp;is&nbsp;to&nbsp;implement&nbsp;collaborative&nbsp;filtering(Item-Item)<br>
+This&nbsp;makes&nbsp;use&nbsp;of&nbsp;3&nbsp;functions<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;main:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set&nbsp;the&nbsp;values&nbsp;for&nbsp;the&nbsp;top&nbsp;correlations&nbsp;and&nbsp;obtain&nbsp;the&nbsp;training&nbsp;and&nbsp;test&nbsp;data&nbsp;for&nbsp;the&nbsp;testing&nbsp;program<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Note:&nbsp;this&nbsp;functionality&nbsp;is&nbsp;not&nbsp;used&nbsp;for&nbsp;the&nbsp;final&nbsp;implementation<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;normalise_collab_matrix:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;normalizes&nbsp;the&nbsp;rating&nbsp;for&nbsp;every&nbsp;item,&nbsp;so&nbsp;that&nbsp;no&nbsp;item&nbsp;has&nbsp;unusually&nbsp;low&nbsp;or&nbsp;high&nbsp;ratings<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;It&nbsp;then&nbsp;finds&nbsp;the&nbsp;cosine&nbsp;similarity&nbsp;and&nbsp;then&nbsp;for&nbsp;the&nbsp;top&nbsp;K&nbsp;[Hardcoded]&nbsp;items,&nbsp;it&nbsp;finds&nbsp;the&nbsp;weighed&nbsp;mean&nbsp;for&nbsp;the&nbsp;rating<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;root_mean_square_error:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;It&nbsp;finds&nbsp;the&nbsp;root&nbsp;mean&nbsp;square&nbsp;error&nbsp;with&nbsp;respect&nbsp;to&nbsp;the&nbsp;test&nbsp;data</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="heapq.html">heapq</a><br>
+</td><td width="25%" valign=top><a href="math.html">math</a><br>
+</td><td width="25%" valign=top><a href="numpy.html">numpy</a><br>
+</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-main"><strong>main</strong></a>()</dt></dl>
+ <dl><dt><a name="-normalise_collab_matrix"><strong>normalise_collab_matrix</strong></a>(data, number_of_items, number_of_users, top_k, collab_matrix)</dt><dd><tt>This&nbsp;function&nbsp;first&nbsp;normalizes&nbsp;the&nbsp;rating&nbsp;for&nbsp;each&nbsp;item&nbsp;and&nbsp;then&nbsp;does&nbsp;a&nbsp;prediction&nbsp;based&nbsp;on&nbsp;the&nbsp;cosine&nbsp;similarity&nbsp;of&nbsp;the&nbsp;K&nbsp;closest<br>
+raters.&nbsp;Note:K&nbsp;is&nbsp;a&nbsp;hardcoded&nbsp;value.&nbsp;<br>
+Input:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data:The&nbsp;ratings&nbsp;corrosponding&nbsp;to&nbsp;every&nbsp;user&nbsp;and&nbsp;item&nbsp;within&nbsp;the&nbsp;dataset.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;number_of_items:The&nbsp;number&nbsp;of&nbsp;items<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;number_of_users:The&nbsp;number&nbsp;of&nbsp;users<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;top_k:The&nbsp;top&nbsp;k&nbsp;values&nbsp;used&nbsp;for&nbsp;cosine&nbsp;similarity<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;collab_matrix:The&nbsp;matrix&nbsp;to&nbsp;be&nbsp;used&nbsp;for&nbsp;predictions<br>
+Output:&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;collab_matrix:The&nbsp;matrix&nbsp;containing&nbsp;all&nbsp;the&nbsp;predictions</tt></dd></dl>
+ <dl><dt><a name="-root_mean_square_error"><strong>root_mean_square_error</strong></a>(test_data, collab_matrix, orig_matrix)</dt><dd><tt>This&nbsp;function&nbsp;finds&nbsp;the&nbsp;error&nbsp;of&nbsp;the&nbsp;predictions&nbsp;of&nbsp;the&nbsp;algorithm,&nbsp;with&nbsp;respect&nbsp;to&nbsp;the&nbsp;training&nbsp;data<br>
+Input:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;test_data:The&nbsp;data&nbsp;which&nbsp;has&nbsp;been&nbsp;used&nbsp;to&nbsp;test&nbsp;the&nbsp;predictions&nbsp;of&nbsp;the&nbsp;algorithm<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;collab_matrix:&nbsp;The&nbsp;matrix&nbsp;containing&nbsp;all&nbsp;the&nbsp;predictions<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;orig_matix:&nbsp;The&nbsp;matrix&nbsp;containing&nbsp;the&nbsp;original&nbsp;data<br>
+Output:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rmse:&nbsp;The&nbsp;root&nbsp;mean&nbsp;square&nbsp;error</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>data</strong> = array([[1, 0, 2, 0, 0, 1],
+       [0, 0, 4, 2, 0...  [4, 1, 5, 2, 2, 4],
+       [0, 3, 0, 0, 5, 0]])<br>
+<strong>number_of_items</strong> = 6<br>
+<strong>number_of_users</strong> = 12<br>
+<strong>test_data</strong> = [(1, 0), (1, 1), (2, 0), (2, 2), (2, 3), (3, 1), (3, 3), (5, 4), (6, 2), (6, 4), (7, 4), (7, 5), (8, 0), (8, 1), (9, 1), (9, 3), (10, 2), (10, 3), (11, 1), (11, 3), ...]<br>
+<strong>top_k</strong> = 3<br>
+<strong>training_data</strong> = [(5, 2, 0), (5, 5, 0), (4, 5, 3), (10, 5, 4), (1, 5, 0), (0, 4, 0), (6, 0, 0), (4, 1, 0), (9, 4, 0), (1, 2, 4), (6, 5, 0), (0, 1, 0), (7, 3, 4), (5, 1, 0), (8, 4, 0), (2, 5, 3), (7, 0, 0), (2, 4, 4), (0, 3, 0), (11, 0, 0), ...]</td></tr></table>
+</body></html>

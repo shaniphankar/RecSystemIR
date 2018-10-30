@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module compare</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>compare</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/phani/Downloads/CS%20F469%20IR/RecSystemIR/compare.py">/home/phani/Downloads/CS F469 IR/RecSystemIR/compare.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="math.html">math</a><br>
+</td><td width="25%" valign=top><a href="numpy.html">numpy</a><br>
+</td><td width="25%" valign=top><a href="os.html">os</a><br>
+</td><td width="25%" valign=top><a href="pprint.html">pprint</a><br>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-main"><strong>main</strong></a>()</dt><dd><tt>Loading&nbsp;the&nbsp;saved&nbsp;data</tt></dd></dl>
+ <dl><dt><a name="-precision_topk"><strong>precision_topk</strong></a>(test_data, collab_matrix, orig_matrix, k, threshold)</dt><dd><tt>Definition&nbsp;of&nbsp;the&nbsp;TopK&nbsp;precision,&nbsp;where&nbsp;K&nbsp;is&nbsp;a&nbsp;variable.<br>
+It&nbsp;tells&nbsp;us&nbsp;about&nbsp;the&nbsp;percentage&nbsp;of&nbsp;relevant&nbsp;documents&nbsp;in&nbsp;the&nbsp;top&nbsp;results&nbsp;returned&nbsp;by&nbsp;the&nbsp;system.<br>
+test_data:&nbsp;The&nbsp;data&nbsp;used&nbsp;for&nbsp;testing&nbsp;(30%&nbsp;of&nbsp;the&nbsp;dataset)<br>
+collab_matrix:&nbsp;The&nbsp;matrix&nbsp;of&nbsp;predicted&nbsp;values&nbsp;generated&nbsp;by&nbsp;using&nbsp;a&nbsp;certain&nbsp;approach<br>
+orig_matrix:&nbsp;The&nbsp;matrix&nbsp;mapping&nbsp;the&nbsp;ratings&nbsp;given&nbsp;by&nbsp;a&nbsp;user&nbsp;and&nbsp;ratings&nbsp;for&nbsp;a&nbsp;movie</tt></dd></dl>
+ <dl><dt><a name="-root_mean_square_error"><strong>root_mean_square_error</strong></a>(test_data, collab_matrix, orig_matrix)</dt><dd><tt>Definition&nbsp;of&nbsp;the&nbsp;Root&nbsp;Mean&nbsp;Square&nbsp;Error<br>
+We&nbsp;calculate&nbsp;the&nbsp;squared&nbsp;error&nbsp;for&nbsp;every&nbsp;pair&nbsp;in&nbsp;the&nbsp;test&nbsp;data&nbsp;and&nbsp;then&nbsp;take&nbsp;the&nbsp;square&nbsp;root&nbsp;of&nbsp;it<br>
+test_data:&nbsp;The&nbsp;data&nbsp;used&nbsp;for&nbsp;testing&nbsp;(30%&nbsp;of&nbsp;the&nbsp;dataset)<br>
+collab_matrix:&nbsp;The&nbsp;matrix&nbsp;of&nbsp;predicted&nbsp;values&nbsp;generated&nbsp;by&nbsp;using&nbsp;a&nbsp;certain&nbsp;approach<br>
+orig_matrix:&nbsp;The&nbsp;matrix&nbsp;mapping&nbsp;the&nbsp;ratings&nbsp;given&nbsp;by&nbsp;a&nbsp;user&nbsp;and&nbsp;ratings&nbsp;for&nbsp;a&nbsp;movie</tt></dd></dl>
+ <dl><dt><a name="-spearman_correlation_coefficient"><strong>spearman_correlation_coefficient</strong></a>(test_data, collab_matrix, orig_matrix)</dt><dd><tt>Definition&nbsp;the&nbsp;Spearman&nbsp;correlation&nbsp;coefficient,&nbsp;it&nbsp;tells&nbsp;us&nbsp;about&nbsp;the&nbsp;statistical&nbsp;dependence&nbsp;between&nbsp;the&nbsp;rankings&nbsp;of&nbsp;two&nbsp;variables.<br>
+test_data:&nbsp;The&nbsp;data&nbsp;used&nbsp;for&nbsp;testing&nbsp;(30%&nbsp;of&nbsp;the&nbsp;dataset)<br>
+collab_matrix:&nbsp;The&nbsp;matrix&nbsp;of&nbsp;predicted&nbsp;values&nbsp;generated&nbsp;by&nbsp;using&nbsp;a&nbsp;certain&nbsp;approach<br>
+orig_matrix:&nbsp;The&nbsp;matrix&nbsp;mapping&nbsp;the&nbsp;ratings&nbsp;given&nbsp;by&nbsp;a&nbsp;user&nbsp;and&nbsp;ratings&nbsp;for&nbsp;a&nbsp;movie</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>f</strong> = &lt;_io.TextIOWrapper name='/home/phani/Downloads/C...R/ml-1m/ratings.dat' mode='r' encoding='latin-1'&gt;<br>
+<strong>line</strong> = '6040::1097::4::956715569<font color="#c040c0">\n</font>'<br>
+<strong>mID_uID_rating</strong> = array([[5., 0., 0., ..., 0., 0., 3.],
+       [0...., 0., 0.],
+       [0., 0., 0., ..., 0., 0., 0.]])</td></tr></table>
+</body></html>

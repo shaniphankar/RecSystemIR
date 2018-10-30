@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module code</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>code</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/phani/Downloads/CS%20F469%20IR/RecSystemIR/code.py">/home/phani/Downloads/CS F469 IR/RecSystemIR/code.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="CF.html">CF</a><br>
+<a href="CF_Baseline.html">CF_Baseline</a><br>
+</td><td width="25%" valign=top><a href="matrixFuncs.html">matrixFuncs</a><br>
+<a href="numpy.html">numpy</a><br>
+</td><td width="25%" valign=top><a href="os.html">os</a><br>
+<a href="pprint.html">pprint</a><br>
+</td><td width="25%" valign=top><a href="svdModified.html">svdModified</a><br>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-main"><strong>main</strong></a>()</dt><dd><tt>This&nbsp;function&nbsp;generates&nbsp;the&nbsp;various&nbsp;collab&nbsp;matrices&nbsp;as&nbsp;output.<br>
+These&nbsp;matrices&nbsp;are&nbsp;later&nbsp;fed&nbsp;into&nbsp;rmse.py&nbsp;to&nbsp;obtain&nbsp;the&nbsp;various&nbsp;metrics&nbsp;associated&nbsp;with&nbsp;each&nbsp;method.<br>
+collab_matrix1:&nbsp;Saved&nbsp;as&nbsp;collab_matrixCF.npy.&nbsp;Corresponds&nbsp;to&nbsp;normal&nbsp;Collaborative&nbsp;Filtering&nbsp;case.<br>
+collab_matrix2:&nbsp;Saved&nbsp;as&nbsp;collab_matrixCFBaseline.npy.&nbsp;Corresponds&nbsp;to&nbsp;Baseline&nbsp;Collaborative&nbsp;Filtering&nbsp;case.<br>
+collab_matrix3:&nbsp;Saved&nbsp;as&nbsp;collab_matrixSVD.npy.&nbsp;Corresponds&nbsp;to&nbsp;normal&nbsp;SVD&nbsp;case.<br>
+collab_matrix4:&nbsp;Saved&nbsp;as&nbsp;collab_matrixSVD90.npy.&nbsp;Corresponds&nbsp;to&nbsp;SVD&nbsp;case&nbsp;with&nbsp;90%&nbsp;energy&nbsp;retained.<br>
+collab_matrix5:&nbsp;Saved&nbsp;as&nbsp;collab_matrixCUR.npy.&nbsp;Corresponds&nbsp;to&nbsp;normal&nbsp;CUR&nbsp;case.<br>
+collab_matrix6:&nbsp;Saved&nbsp;as&nbsp;collab_matrixCUR90.npy.&nbsp;Corresponds&nbsp;to&nbsp;CUR&nbsp;case&nbsp;in&nbsp;which&nbsp;intermediate&nbsp;SVD&nbsp;retains&nbsp;90%&nbsp;energy.</tt></dd></dl>
+ <dl><dt><a name="-sample"><strong>sample</strong></a>(number_of_items, number_of_users, data)</dt><dd><tt>The&nbsp;following&nbsp;function&nbsp;divides&nbsp;the&nbsp;various&nbsp;data&nbsp;points&nbsp;in&nbsp;a&nbsp;70:30&nbsp;fashion.<br>
+To&nbsp;do&nbsp;this,&nbsp;it&nbsp;uses&nbsp;the&nbsp;permuatation&nbsp;function&nbsp;of&nbsp;Python's&nbsp;inbuilt&nbsp;random&nbsp;module.<br>
+number_of_items:&nbsp;contains&nbsp;the&nbsp;number&nbsp;of&nbsp;items&nbsp;in&nbsp;the&nbsp;ratings&nbsp;matrix<br>
+number_of_users:&nbsp;contains&nbsp;the&nbsp;number&nbsp;of&nbsp;users&nbsp;in&nbsp;the&nbsp;ratings&nbsp;matrix<br>
+data:&nbsp;Contains&nbsp;the&nbsp;ratings&nbsp;matrix&nbsp;from&nbsp;which&nbsp;the&nbsp;sampling&nbsp;is&nbsp;done</tt></dd></dl>
+</td></tr></table>
+</body></html>
